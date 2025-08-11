@@ -43,7 +43,7 @@ pipeline {
 
     post {
         success {
-            echo " Build passed for SignUp component!"
+            echo " Build passed for SignUp component good luck!"
         }
         failure {
             echo " Build failed — check logs."
