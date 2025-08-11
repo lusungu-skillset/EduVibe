@@ -1,8 +1,9 @@
 pipeline {
     agent {
         docker {
+            label 'signupage'
             image 'node:18' 
-            args '-v /root/.npm:/root/.npm' 
+            args '-u root' 
         }
     }
 
