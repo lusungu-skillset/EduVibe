@@ -1,43 +1,51 @@
 pipeline {
-    agent { label 'signupage' }
-
-    environment {
-        CI = 'true'
-    }
+    agent none  // No default agent; specify per-stage or globally
 
     stages {
         stage('Checkout') {
+            agent { label 'signupage' }  // Use your existing agent for checkout if needed
             steps {
-                echo "Cloning repository..."
+                echo 'Cloning repository...'
                 git branch: 'signupage', url: 'https://github.com/lusungu-skillset/EduVibe.git'
             }
         }
-
         stage('Install Dependencies') {
+            agent {
+                docker { 
+                    image 'node:20'  // Official Node.js image with npm pre-installed
+                    reuseNode true  // Reuse the workspace from previous stages
+                }
+            }
             steps {
                 sh 'npm ci'
             }
         }
-
         stage('Lint Check') {
+            agent {
+                docker { 
+                    image 'node:20'
+                    reuseNode true
+                }
+            }
             steps {
-                sh 'npx eslint src --ext .js,.jsx || true'
+                sh 'npm run lint'  // Assuming you have a lint script in package.json
             }
         }
-
         stage('Build React App') {
+            agent {
+                docker { 
+                    image 'node:20'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'npm run build'
             }
         }
     }
-
     post {
-        success {
-            echo "Build passed for SignUp component — good luck!"
-        }
-        failure {
-            echo "Build failed — check logs."
+        always {
+            echo 'Build completed — check logs.'
         }
     }
 }
