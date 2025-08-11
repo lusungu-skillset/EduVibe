@@ -1,14 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            label 'signupage'
-            image 'node:18' 
-            args '-u root' 
-        }
-    }
+    agent { label 'signupage' }
 
     environment {
-        CI = 'true' 
+        CI = 'true'
     }
 
     stages {
@@ -21,32 +15,41 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo "Installing dependencies..."
-                sh 'npm ci'
+                script {
+                    docker.image('node:18').inside('-u root') {
+                        sh 'npm ci'
+                    }
+                }
             }
         }
 
         stage('Lint Check') {
             steps {
-                echo "Running ESLint check..."
-                sh 'npx eslint src --ext .js,.jsx || true'
+                script {
+                    docker.image('node:18').inside('-u root') {
+                        sh 'npx eslint src --ext .js,.jsx || true'
+                    }
+                }
             }
         }
 
         stage('Build React App') {
             steps {
-                echo "Building React app..."
-                sh 'npm run build'
+                script {
+                    docker.image('node:18').inside('-u root') {
+                        sh 'npm run build'
+                    }
+                }
             }
         }
     }
 
     post {
         success {
-            echo " Build passed for SignUp component good luck!"
+            echo "Build passed for SignUp component — good luck!"
         }
         failure {
-            echo " Build failed — check logs."
+            echo "Build failed — check logs."
         }
     }
 }
