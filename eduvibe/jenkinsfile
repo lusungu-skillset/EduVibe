@@ -1,51 +1,46 @@
 pipeline {
-    agent none  // No default agent; specify per-stage or globally
-
+    agent {
+        docker {
+            image 'node:20-alpine'  
+            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'  
+            reuseNode true  
+        }
+    }
+    environment {
+        NODE_ENV = 'production'  
+    }
     stages {
         stage('Checkout') {
-            agent { label 'signupage' }  // Use your existing agent for checkout if needed
             steps {
-                echo 'Cloning repository...'
-                git branch: 'signupage', url: 'https://github.com/lusungu-skillset/EduVibe.git'
+                checkout scm 
             }
         }
         stage('Install Dependencies') {
-            agent {
-                docker { 
-                    image 'node:20'  // Official Node.js image with npm pre-installed
-                    reuseNode true  // Reuse the workspace from previous stages
-                }
-            }
             steps {
-                sh 'npm ci'
+                sh 'npm ci' 
             }
         }
-        stage('Lint Check') {
-            agent {
-                docker { 
-                    image 'node:20'
-                    reuseNode true
-                }
-            }
+        stage('Lint') {
             steps {
-                sh 'npm run lint'  // Assuming you have a lint script in package.json
+                sh 'npm run lint' 
             }
         }
-        stage('Build React App') {
-            agent {
-                docker { 
-                    image 'node:20'
-                    reuseNode true
-                }
-            }
+        stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'npm run build'  
             }
         }
     }
     post {
         always {
-            echo 'Build completed — check logs.'
+            echo 'Cleaning up workspace'
+            deleteDir()  
+        }
+        success {
+            echo 'Build and lint successful! Ready for merge to dev.'
+        }
+        failure {
+            echo 'Build or lint failed. Fix issues before merging.'
         }
     }
 }
