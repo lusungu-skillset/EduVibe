@@ -4,6 +4,7 @@ pipeline {
             image 'node:20-alpine'  
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'  
             reuseNode true  
+            label 'eduvibe'  // Assigns to your Docker agent to ensure it's used and not offline
         }
     }
     environment {
