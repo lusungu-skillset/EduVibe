@@ -1,8 +1,12 @@
 pipeline {
     agent { label 'eduvibe-agent' }
 
+    tools {
+        nodejs 'Node24'   // 👈 set up Node24 in Jenkins global tools
+    }
+
     environment {
-        NODE_ENV = 'production'
+        NODE_ENV = 'development'   // 👈 use development so devDependencies (eslint, vite) are installed
     }
 
     stages {
@@ -12,18 +16,31 @@ pipeline {
             }
         }
 
-     stage('Install & Build') {
-    steps {
-        nodejs(nodeJSInstallationName: 'Node20') {
-            dir('eduvibe') {   
-                sh 'node -v'
-                sh 'npm -v'
-                sh 'npm ci'
-                sh 'npm run build'
+        stage('Install Dependencies') {
+            steps {
+                dir('eduvibe') {
+                    sh 'node -v'
+                    sh 'npm -v'
+                    sh 'npm ci --include=dev'
+                }
             }
         }
-    }
-}
+
+        stage('Lint') {
+            steps {
+                dir('eduvibe') {
+                    sh 'npm run lint'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('eduvibe') {
+                    sh 'npm run build'
+                }
+            }
+        }
     }
 
     post {
