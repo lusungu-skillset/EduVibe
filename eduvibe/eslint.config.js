@@ -1,3 +1,4 @@
+// eslint.config.js
 import js from "@eslint/js";
 import globals from "globals";
 import reactPlugin from "eslint-plugin-react";
@@ -7,7 +8,10 @@ export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node, // add if you also run in Node.js
+      },
       ecmaVersion: "latest",
       sourceType: "module",
     },
@@ -15,10 +19,8 @@ export default defineConfig([
       react: reactPlugin,
     },
     rules: {
-      "react/react-in-jsx-scope": "off", // Next.js/React 17+ don’t need React import
+      ...js.configs.recommended.rules, // JS recommended rules
+      ...reactPlugin.configs.recommended.rules, // React recommended rules
     },
   },
-  // Correct way: spread the flat config array
-  ...reactPlugin.configs.flat.recommended,
-  js.configs.recommended,
 ]);
