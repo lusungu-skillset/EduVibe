@@ -1,10 +1,6 @@
 pipeline {
     agent { label 'eduvibe-agent' }
 
-    tools {
-        nodejs "Node20"   // Define "Node20" in Jenkins Global Tool Config
-    }
-
     environment {
         NODE_ENV = 'production'
     }
@@ -15,19 +11,16 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Install Dependencies') {
+
+        stage('Install & Build') {
             steps {
-                sh 'npm ci'
-            }
-        }
-        stage('Lint') {
-            steps {
-                sh 'npm run lint'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
+                nodejs(nodeJSInstallationName: 'Node20') {
+                    sh 'node -v'
+                    sh 'npm -v'
+                    sh 'npm ci'
+                    sh 'npm run lint'
+                    sh 'npm run build'
+                }
             }
         }
     }
@@ -38,10 +31,10 @@ pipeline {
             deleteDir()
         }
         success {
-            echo 'Build and lint successful! Ready for merge to dev.'
+            echo '✅ Build and lint successful!'
         }
         failure {
-            echo 'Build or lint failed. Fix issues before merging.'
+            echo '❌ Build or lint failed!'
         }
     }
 }
