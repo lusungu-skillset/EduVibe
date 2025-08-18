@@ -8,19 +8,31 @@ export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
+      parser: require.resolve("@babel/eslint-parser"),
+      parserOptions: {
+        requireConfigFile: false, // no need for babel.config.js
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       globals: {
         ...globals.browser,
-        ...globals.node, // add if you also run in Node.js
+        ...globals.node,
       },
-      ecmaVersion: "latest",
-      sourceType: "module",
     },
     plugins: {
       react: reactPlugin,
     },
     rules: {
-      ...js.configs.recommended.rules, // JS recommended rules
-      ...reactPlugin.configs.recommended.rules, // React recommended rules
+      ...js.configs.recommended.rules,
+      ...reactPlugin.configs.recommended.rules,
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
 ]);
