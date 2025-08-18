@@ -2,7 +2,7 @@ pipeline {
     agent { label 'eduvibe-agent' }
 
     tools {
-        nodejs 'Node24'   // 👈 set up Node24 in Jenkins global tools
+        nodejs 'Node20'   // 👈 set up Node24 in Jenkins global tools
     }
 
     environment {
