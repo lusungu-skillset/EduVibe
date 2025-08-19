@@ -4,7 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import banner from "/src/assets/banner.svg";
 
 
-const SignUp = () => {
+const SignUp= () => {
   const [gender, setGender] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,7 +25,7 @@ const SignUp = () => {
     <div className="flex justify-center xl:mb-0 mb-10 px-2 lg:mt-20 ">
       <div className="flex flex-col lg:flex-row items-center xl:w-[137vh] w-full max-w-[1200px] lg:h-[80vh]">
         
-        <div className="w-full lg:ml-[12vh] lg:w-[150vh] h-full lg:h-[90vh] xl:h-[76vh] flex justify-center">
+        <div className="w-full lg:ml-[12vh] lg:w-[250vh] h-full lg:h-[90vh] xl:h-[76vh] flex justify-center">
           <img
             src={banner}
             alt="Eduvibe"
@@ -33,11 +33,11 @@ const SignUp = () => {
           />
         </div>
 
-        <div className="w-full lg:w-[150vh] lg:mr-[12vh] lg:h-[90vh] xl:h-[76vh] h-full flex justify-center">
+        <div className="w-full lg:w-[250vh] lg:mr-[12vh] lg:h-[90vh] xl:h-[76vh] h-full flex justify-center">
           <div className="bg-[#D2E6E4] w-full max-w-[500px] h-full py-6 px-4 flex flex-col justify-center">
             <div className="flex flex-col">
               <div className="flex justify-center text-[#3442D9] font-bold text-2xl sm:text-3xl">
-                <h1>EDU VIBE</h1>
+                <h1>EduVibe</h1>
               </div>
               <div className="flex justify-center text-[#FD905E] font-bold mt-2 text-lg sm:text-lg">
                 <h2>Create Account</h2>
