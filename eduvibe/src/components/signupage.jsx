@@ -2,9 +2,8 @@ import React from 'react';
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; 
-
 import banner from "/src/assets/banner.svg";
-import axios from "axios";
+
 
 const SignUp = () => {
   const [gender, setGender] = useState('');
@@ -14,28 +13,14 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
 
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (password !== confirmPassword) {
-    setError("Passwords do not match!");
-  } else {
-    setError("");
-    try {
-      const response = await axios.post('/api/signup', {
-        username: 'mockUser',
-        email: 'mock@email.com',
-        password,
-        gender
-      });
-      console.log("Form submitted", response.data);
-    } catch (err) {
-      console.error("Submission error", err);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+    } else {
+      setError("");
     }
-  }
-};
-
+  };
 
   return (
     <div className="flex justify-center xl:mb-0 mb-10 px-2 lg:mt-20 ">
@@ -49,27 +34,30 @@ const handleSubmit = async (e) => {
           />
         </div>
 
-        
         <div className="w-full lg:w-[150vh] lg:mr-[12vh] lg:h-[90vh] xl:h-[76vh] h-full flex justify-center">
           <div className="bg-[#D2E6E4] w-full max-w-[500px] h-full py-6 px-4 flex flex-col justify-center">
             <div className="flex flex-col">
               <div className="flex justify-center text-[#3442D9] font-bold text-2xl sm:text-3xl">
-                <label>EDU VIBE</label>
+                <h1>EDU VIBE</h1>
               </div>
               <div className="flex justify-center text-[#FD905E] font-bold mt-2 text-lg sm:text-lg">
-                <label>Create Account</label>
+                <h2>Create Account</h2>
               </div>
 
               <form className="mt-5" onSubmit={handleSubmit}>
                 <div className="flex justify-center">
                   <div className="space-y-4 w-full">
                   
+                    {/* Username */}
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
                         <FaUser size={14} />
-                        <label className="font-sans text-gray-800 text-md">User name</label>
+                        <label htmlFor="username" className="font-sans text-gray-800 text-md">
+                          User name
+                        </label>
                       </div>
                       <input
+                        id="username"
                         className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm"
                         type="text"
                         placeholder="Enter your username"
@@ -77,13 +65,16 @@ const handleSubmit = async (e) => {
                       />
                     </div>
 
-                  
+                    {/* Email */}
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
                         <FaEnvelope size={16} />
-                        <label className="text-gray-800 text-md">User email</label>
+                        <label htmlFor="email" className="text-gray-800 text-md">
+                          User email
+                        </label>
                       </div>
                       <input
+                        id="email"
                         className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm"
                         type="email"
                         placeholder="you@gmail.com"
@@ -91,61 +82,72 @@ const handleSubmit = async (e) => {
                       />
                     </div>
 
-                
+                    {/* Password */}
                     <div className="flex flex-col relative">
                       <div className="flex items-center gap-1">
                         <FaLock size={16} />
-                        <label className="text-gray-800 text-md">User password</label>
+                        <label htmlFor="password" className="text-gray-800 text-md">
+                          User password
+                        </label>
                       </div>
                       <input
+                        id="password"
                         className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm pr-10"
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                       />
-                      <span
+                      <button
+                        type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-9 cursor-pointer text-gray-700"
+                        className="absolute right-3 top-9 text-gray-700"
+                        aria-label="Toggle password visibility"
                       >
                         {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                      </span>
+                      </button>
                     </div>
 
-                    
+                    {/* Confirm Password */}
                     <div className="flex flex-col relative">
                       <div className="flex items-center gap-1">
                         <FaLock size={16} />
-                        <label className=" text-gray-800 text-md">Confirm password</label>
+                        <label htmlFor="confirmPassword" className=" text-gray-800 text-md">
+                          Confirm password
+                        </label>
                       </div>
                       <input
+                        id="confirmPassword"
                         className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm pr-10"
                         type={showConfirmPassword ? "text" : "password"}
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                       />
-                      <span
+                      <button
+                        type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-3 top-9 cursor-pointer text-gray-700"
+                        className="absolute right-3 top-9 text-gray-700"
+                        aria-label="Toggle confirm password visibility"
                       >
                         {showConfirmPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                      </span>
+                      </button>
                     </div>
 
-                
+                    {/* Error */}
                     {error && (
                       <div className="text-red-600 text-sm font-semibold text-center">
                         {error}
                       </div>
                     )}
 
-                    
+                    {/* Gender */}
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-800 text-md">Select Gender</label>
                       <div className="flex items-center gap-6">
-                        <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <label htmlFor="male" className="inline-flex items-center gap-2 cursor-pointer">
                           <input
+                            id="male"
                             type="radio"
                             name="gender"
                             value="male"
@@ -156,8 +158,9 @@ const handleSubmit = async (e) => {
                           />
                           <span className="text-gray-700">Male</span>
                         </label>
-                        <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <label htmlFor="female" className="inline-flex items-center gap-2 cursor-pointer">
                           <input
+                            id="female"
                             type="radio"
                             name="gender"
                             value="female"
@@ -171,7 +174,7 @@ const handleSubmit = async (e) => {
                       </div>
                     </div>
 
-                  
+                    {/* Signup button */}
                     <div className="flex justify-center mt-4">
                       <button
                         id="signup"
