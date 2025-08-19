@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; 
@@ -142,8 +141,8 @@ const SignUp = () => {
                     )}
 
                     {/* Gender */}
-                    <div className="flex flex-col gap-2">
-                      <label className="text-gray-800 text-md">Select Gender</label>
+                    <fieldset className="flex flex-col gap-2">
+                      <legend className="text-gray-800 text-md">Select Gender</legend>
                       <div className="flex items-center gap-6">
                         <label htmlFor="male" className="inline-flex items-center gap-2 cursor-pointer">
                           <input
@@ -172,7 +171,7 @@ const SignUp = () => {
                           <span className="text-gray-700">Female</span>
                         </label>
                       </div>
-                    </div>
+                    </fieldset>
 
                     {/* Signup button */}
                     <div className="flex justify-center mt-4">
