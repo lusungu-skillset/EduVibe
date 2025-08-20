@@ -29,17 +29,17 @@ const SignUp= () => {
           <img
             src={banner}
             alt="Eduvibe"
-            className="w-full h-full max-w-[500px] object-cover object-center mt-6 lg:mt-0"
+            className="w-full h-full max-w-[500px] object-cover object-center mt-6 lg:mt-0 shadow rounded-l-lg"
           />
         </div>
 
-        <div className="w-full lg:w-[250vh] lg:mr-[12vh] lg:h-[90vh] xl:h-[76vh] h-full flex justify-center">
-          <div className="bg-[#D2E6E4] w-full max-w-[500px] h-full py-6 px-4 flex flex-col justify-center">
+        <div className="w-full lg:w-[250vh] lg:mr-[12vh] lg:h-[90vh] xl:h-[76vh] h-full flex justify-center shadow">
+          <div className="bg-[#D2E6E4] w-full max-w-[500px] h-full py-6 px-4 flex flex-col justify-center rounded-r-lg">
             <div className="flex flex-col">
               <div className="flex justify-center text-[#3442D9] font-bold text-2xl sm:text-3xl">
                 <h1>EduVibe</h1>
               </div>
-              <div className="flex justify-center text-[#FD905E] font-bold mt-2 text-lg sm:text-lg">
+              <div className="flex justify-center text-[#FD905E] font-extrabold mt-2 text-lg sm:text-lg">
                 <h2>Create Account</h2>
               </div>
 
@@ -51,13 +51,13 @@ const SignUp= () => {
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
                         <FaUser size={14} />
-                        <label htmlFor="username" className="font-sans text-gray-800 text-md">
+                        <label htmlFor="username" className="text-gray-800 text-md">
                           User name
                         </label>
                       </div>
                       <input
                         id="username"
-                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm"
+                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border-t border-b border-gray-500 text-sm"
                         type="text"
                         placeholder="Enter your username"
                         required
@@ -68,13 +68,13 @@ const SignUp= () => {
                     <div className="flex flex-col">
                       <div className="flex items-center gap-1">
                         <FaEnvelope size={16} />
-                        <label htmlFor="email" className="text-gray-800 text-md">
+                        <label htmlFor="email" className=" text-gray-800 text-md">
                           User email
                         </label>
                       </div>
                       <input
                         id="email"
-                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm"
+                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border-t border-b border-gray-500 text-sm"
                         type="email"
                         placeholder="you@gmail.com"
                         required
@@ -91,7 +91,7 @@ const SignUp= () => {
                       </div>
                       <input
                         id="password"
-                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm pr-10"
+                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border-t border-b border-gray-500 text-sm pr-10"
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -117,7 +117,7 @@ const SignUp= () => {
                       </div>
                       <input
                         id="confirmPassword"
-                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border border-gray-500 text-sm pr-10"
+                        className="bg-gray-100 p-1.5 w-full mt-1 rounded border-t border-b border-gray-500 text-sm pr-10"
                         type={showConfirmPassword ? "text" : "password"}
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
