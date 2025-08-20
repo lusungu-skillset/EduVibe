@@ -83,8 +83,11 @@ const Login = () => {
 
             {/* Signup Link */}
             <p className="mt-4 text-center text-sm text-gray-600">
-              Don't have an account?
-              <Link to="/signup" className="text-purple-700 font-semibold ml-1 cursor-pointer hover:underline">
+              Don&apos;t have an account?
+              <Link
+                to="/signup"
+                className="text-purple-700 font-semibold ml-1 cursor-pointer hover:underline"
+              >
                 Sign up
               </Link>
             </p>
