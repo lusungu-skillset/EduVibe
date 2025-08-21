@@ -7,6 +7,13 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Handler for navigation items that don't have real links yet
+  const handleNavigationClick = (e, section) => {
+    e.preventDefault();
+    console.log(`Navigating to: ${section}`);
+    // You can replace this with actual navigation logic
+  };
+
   return (
     <header className="bg-white shadow-md relative">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -18,10 +25,30 @@ const Header = () => {
         {/* Desktop Navigation - visible on medium screens and up */}
         <div className="hidden md:flex items-center space-x-8">
           <nav className="flex space-x-8">
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] font-medium">Home</a>
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] font-medium">About Us</a>
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] font-medium">Courses</a>
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] font-medium">Contact</a>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'Home')}
+              className="text-gray-800 hover:text-[#0B7077] font-medium bg-transparent border-none cursor-pointer p-0"
+            >
+              Home
+            </button>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'About Us')}
+              className="text-gray-800 hover:text-[#0B7077] font-medium bg-transparent border-none cursor-pointer p-0"
+            >
+              About Us
+            </button>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'Courses')}
+              className="text-gray-800 hover:text-[#0B7077] font-medium bg-transparent border-none cursor-pointer p-0"
+            >
+              Courses
+            </button>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'Contact')}
+              className="text-gray-800 hover:text-[#0B7077] font-medium bg-transparent border-none cursor-pointer p-0"
+            >
+              Contact
+            </button>
           </nav>
 
           {/* Auth Buttons - Always visible on desktop */}
@@ -54,6 +81,7 @@ const Header = () => {
             onClick={toggleMenu}
             className="text-gray-800 focus:outline-none"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,10 +100,30 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white py-2 px-4 shadow-lg">
           <div className="flex flex-col space-y-3">
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] py-2">Home</a>
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] py-2">About Us</a>
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] py-2">Courses</a>
-            <a href="#" className="text-gray-800 hover:text-[#0B7077] py-2">Contact</a>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'Home')}
+              className="text-gray-800 hover:text-[#0B7077] py-2 text-left bg-transparent border-none cursor-pointer"
+            >
+              Home
+            </button>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'About Us')}
+              className="text-gray-800 hover:text-[#0B7077] py-2 text-left bg-transparent border-none cursor-pointer"
+            >
+              About Us
+            </button>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'Courses')}
+              className="text-gray-800 hover:text-[#0B7077] py-2 text-left bg-transparent border-none cursor-pointer"
+            >
+              Courses
+            </button>
+            <button 
+              onClick={(e) => handleNavigationClick(e, 'Contact')}
+              className="text-gray-800 hover:text-[#0B7077] py-2 text-left bg-transparent border-none cursor-pointer"
+            >
+              Contact
+            </button>
             {/* Mobile Auth Buttons - Only in dropdown on small screens */}
             <div className="pt-4 border-t border-gray-200 mt-2">
               <a 

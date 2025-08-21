@@ -3,9 +3,14 @@ import CountUp from 'react-countup';
 import { FaUserGraduate, FaChalkboardTeacher, FaInfinity } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import courseImage from '../assets/course-image.png';
+import Header from './Header';
 
 export default function Homepage() {
   return (
+  <div>
+    <div>
+    <Header/>
+    </div>
     <div className="min-h-screen bg-[#D2E6E4] flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
@@ -116,5 +121,6 @@ export default function Homepage() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
