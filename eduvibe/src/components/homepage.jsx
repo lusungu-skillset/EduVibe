@@ -16,7 +16,7 @@ export default function Homepage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* "Never stop learning" subtitle */}
+            {/* "Never sttop learning" subtitle */}
             <motion.div
               className="relative inline-flex items-center justify-center mb-4"
               initial={{ opacity: 0, y: 20 }}
