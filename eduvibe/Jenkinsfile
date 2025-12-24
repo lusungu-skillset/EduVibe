@@ -1,0 +1,59 @@
+pipeline {
+    agent { label 'eduvibe-agent' }
+
+    tools {
+        nodejs 'Node20'   
+    }
+
+    environment {
+        NODE_ENV = 'development' 
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('eduvibe') {
+                    sh 'node -v'
+                    sh 'npm -v'
+                    sh 'npm ci --include=dev'
+                }
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                dir('eduvibe') {
+                    sh 'npm run lint -- --max-warnings=0'
+
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('eduvibe') {
+                    sh 'npm run build'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up workspace'
+            deleteDir()
+        }
+        success {
+            echo '✅ Build and lint successful!'
+        }
+        failure {
+            echo '❌ Build or lint failed!'
+        }
+    }
+}
